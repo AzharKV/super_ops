@@ -64,7 +64,8 @@ class AuthorCard extends StatelessWidget {
               children: [
                 if (!isSearchList)
                   IconButton(
-                    onPressed: () => authorController.favouriteAction(index),
+                    onPressed: () => authorController.favouriteList[index] =
+                        !authorController.favouriteList[index],
                     splashColor: Colors.transparent,
                     icon: Obx(() => authorController.favouriteList[index]
                         ? const Icon(Icons.favorite, color: Colors.red)

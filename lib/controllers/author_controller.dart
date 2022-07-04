@@ -95,10 +95,4 @@ class AuthorController extends GetxController {
       isSearchList.value = false;
     }
   }
-
-  void favouriteAction(int index) {
-    print(favouriteList[index]);
-    favouriteList[index] = !favouriteList[index];
-    print(favouriteList[index]);
-  }
 }
