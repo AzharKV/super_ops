@@ -5,6 +5,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // HttpService httpService = HttpService();
+    // httpService.get("http://message-list.ap.com/messages?limit=1");
     return Scaffold(
       body: SafeArea(
         child: Padding(
