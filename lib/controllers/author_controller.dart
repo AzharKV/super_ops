@@ -12,9 +12,11 @@ class AuthorController extends GetxController {
 
   RxBool loading = true.obs;
   RxBool paginationLoading = false.obs;
+  RxBool isSearchList = false.obs;
   String? paginationToken;
 
   RxList<AuthorsListModel> authorsList = <AuthorsListModel>[].obs;
+  RxList<AuthorsListModel> searchedAuthorsList = <AuthorsListModel>[].obs;
 
   @override
   void onInit() {
@@ -72,5 +74,21 @@ class AuthorController extends GetxController {
     DateTime now = DateTime.now();
 
     return "${now.difference(dateTime).inDays ~/ 365} years ago";
+  }
+
+  void onSearch(String? value) {
+    if (value != null && value.isNotEmpty) {
+      isSearchList.value = true;
+
+      var newList = authorsList
+          .where((p0) => p0.name.toUpperCase().contains(value.toUpperCase()))
+          .toList()
+          .obs;
+
+      searchedAuthorsList.clear();
+      searchedAuthorsList = newList;
+    } else {
+      isSearchList.value = false;
+    }
   }
 }

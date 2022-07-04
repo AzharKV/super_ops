@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:super_ops/const/config.dart';
 import 'package:super_ops/controllers/author_controller.dart';
-import 'package:super_ops/data/models/authors_list_model.dart';
-import 'package:super_ops/view/home_section/widgets/author_card.dart';
+import 'package:super_ops/view/home_section/widgets/author_list.dart';
+import 'package:super_ops/view/home_section/widgets/search_field.dart';
+import 'package:super_ops/view/home_section/widgets/search_list.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -21,53 +21,14 @@ class HomeScreen extends StatelessWidget {
                 ? const Center(child: CircularProgressIndicator())
                 : Column(
                     children: [
-                      TextField(
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.only(left: 24.0),
-                          filled: true,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(32),
-                              borderSide: BorderSide.none),
-                          fillColor: const Color(0xFFF5F5F5),
-                          hintText: "Search...",
-                          hintStyle:
-                              TextStyle(color: Colors.black.withOpacity(0.5)),
-                          suffixIcon: Icon(
-                            Icons.search,
-                            color: Colors.black.withOpacity(0.5),
-                          ),
-                        ),
-                      ),
+                      SearchField(authorController: authorController),
                       const SizedBox(height: 16.0),
-                      Expanded(
-                        child: ListView.separated(
-                          controller: authorController.scrollController,
-                          itemCount: authorController.authorsList.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            AuthorsListModel data =
-                                authorController.authorsList[index];
-
-                            String imagePath =
-                                ConfigData.baseUrl + data.photoUrl;
-
-                            return Obx(
-                              () => Column(
-                                children: [
-                                  AuthorCard(imagePath: imagePath, data: data),
-                                  if (authorController
-                                          .paginationLoading.value &&
-                                      (index + 1) ==
-                                          authorController.authorsList.length)
-                                    const CircularProgressIndicator()
-                                ],
-                              ),
-                            );
-                          },
-                          separatorBuilder: (BuildContext context, int index) {
-                            return const SizedBox(height: 16.0);
-                          },
-                        ),
-                      ),
+                      authorController.isSearchList.value
+                          ? SearchList(authorController: authorController)
+                          : AuthorList(
+                              authorController: authorController,
+                              totalCount: authorController.authorsList.length,
+                              listData: authorController.authorsList),
                     ],
                   ),
           ),
