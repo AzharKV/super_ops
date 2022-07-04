@@ -23,13 +23,7 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Details",
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0.0,
-        iconTheme: const IconThemeData(color: Colors.red),
+        title: const Text("Details", style: TextStyle(color: Colors.black)),
         actions: [
           FavouriteButton(authorController: authorController, index: index),
         ],
@@ -46,10 +40,7 @@ class DetailScreen extends StatelessWidget {
               ),
             ),
             Text(data.name, style: Theme.of(context).textTheme.titleLarge),
-            Text(
-              data.content,
-              textAlign: TextAlign.justify,
-            ),
+            Text(data.content, textAlign: TextAlign.justify),
           ]
               .map((e) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 12.0),

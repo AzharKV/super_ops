@@ -4,6 +4,7 @@ import 'package:super_ops/controllers/author_controller.dart';
 import 'package:super_ops/view/home_section/widgets/author_list.dart';
 import 'package:super_ops/view/home_section/widgets/search_field.dart';
 import 'package:super_ops/view/home_section/widgets/search_list.dart';
+import 'package:super_ops/view/widgets/sizedbox.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -22,15 +23,14 @@ class HomeScreen extends StatelessWidget {
                 : Column(
                     children: [
                       SearchField(authorController: authorController),
-                      const SizedBox(height: 16.0),
+                      sizedBoxH16,
                       authorController.isSearchList.value
                           ? SearchList(authorController: authorController)
                           : AuthorList(
                               authorController: authorController,
                               totalCount: authorController.authorsList.length,
                               listData: authorController.authorsList,
-                              isSearchList: false,
-                            ),
+                              isSearchList: false),
                     ],
                   ),
           ),

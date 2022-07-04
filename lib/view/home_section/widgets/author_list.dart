@@ -4,6 +4,7 @@ import 'package:super_ops/const/config.dart';
 import 'package:super_ops/controllers/author_controller.dart';
 import 'package:super_ops/data/models/authors_list_model.dart';
 import 'package:super_ops/view/home_section/widgets/author_card.dart';
+import 'package:super_ops/view/widgets/sizedbox.dart';
 
 class AuthorList extends StatelessWidget {
   const AuthorList({
@@ -50,9 +51,7 @@ class AuthorList extends StatelessWidget {
             ),
           );
         },
-        separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(height: 16.0);
-        },
+        separatorBuilder: (BuildContext context, int index) => sizedBoxH16,
       ),
     );
   }

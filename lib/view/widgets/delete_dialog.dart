@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:super_ops/controllers/author_controller.dart';
 import 'package:super_ops/data/models/authors_list_model.dart';
+import 'package:super_ops/view/widgets/author_image_widget.dart';
 import 'package:super_ops/view/widgets/outlined_delete_button.dart';
 
 class DeleteDialog extends StatelessWidget {
@@ -31,14 +32,7 @@ class DeleteDialog extends StatelessWidget {
       ),
       content: Row(
         children: [
-          Container(
-            height: 50.0,
-            width: 50.0,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(image: NetworkImage(imagePath)),
-            ),
-          ),
+          AuthorImageWidget(imagePath: imagePath),
           const SizedBox(width: 12.0),
           Column(
             mainAxisSize: MainAxisSize.min,
