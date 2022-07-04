@@ -46,7 +46,7 @@ class AuthorController extends GetxController {
   Future<void> fetchMoreAuthorList() async {
     paginationLoading.value = true;
 
-    String url = "${ConfigData.authorsListApi}?pageToken=$paginationToken";
+    String url = "${ConfigData.authorsListApi}&pageToken=$paginationToken";
 
     var result = await authorRepository.fetchAuthorsList(url);
     await addFetchedData(result);

@@ -1,4 +1,4 @@
 class ConfigData {
   static const String baseUrl = "http://message-list.appspot.com/";
-  static const String authorsListApi = "${baseUrl}messages";
+  static const String authorsListApi = "${baseUrl}messages?limit=10";
 }
