@@ -10,7 +10,7 @@ class HttpService {
     var response = await http.get(Uri.parse(url));
 
     Utility().customDebugPrint(
-        "url: $url \nstatusCode: ${response.statusCode} \nresponse ${response.body}");
+        "url: $url \nstatusCode: ${response.statusCode} \nresponse ${response.body}}");
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
