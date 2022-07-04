@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0) + const EdgeInsets.only(top: 8.0),
+          padding: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 0.0),
           child: Obx(
             () => authorController.loading.value
                 ? const Center(child: CircularProgressIndicator())
@@ -41,6 +41,7 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(height: 16.0),
                       Expanded(
                         child: ListView.separated(
+                          controller: authorController.scrollController,
                           itemCount: authorController.authorsList.length,
                           itemBuilder: (BuildContext context, int index) {
                             AuthorsListModel data =
@@ -49,13 +50,24 @@ class HomeScreen extends StatelessWidget {
                             String imagePath =
                                 ConfigData.baseUrl + data.photoUrl;
 
-                            return AuthorCard(imagePath: imagePath, data: data);
+                            return Obx(
+                              () => Column(
+                                children: [
+                                  AuthorCard(imagePath: imagePath, data: data),
+                                  if (authorController
+                                          .paginationLoading.value &&
+                                      (index + 1) ==
+                                          authorController.authorsList.length)
+                                    const CircularProgressIndicator()
+                                ],
+                              ),
+                            );
                           },
                           separatorBuilder: (BuildContext context, int index) {
                             return const SizedBox(height: 16.0);
                           },
                         ),
-                      )
+                      ),
                     ],
                   ),
           ),
