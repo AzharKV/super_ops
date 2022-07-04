@@ -95,4 +95,15 @@ class AuthorController extends GetxController {
       isSearchList.value = false;
     }
   }
+
+  void delete(context, {required int id, required bool isSearchList}) {
+    Navigator.pop(context);
+
+    if (isSearchList) {
+      searchedAuthorsList.removeWhere((element) => element.id == id);
+    }
+    favouriteList
+        .removeAt(authorsList.indexWhere((element) => element.id == id));
+    authorsList.removeWhere((element) => element.id == id);
+  }
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:super_ops/controllers/author_controller.dart';
 import 'package:super_ops/data/models/authors_list_model.dart';
+import 'package:super_ops/view/widgets/delete_dialog.dart';
+import 'package:super_ops/view/widgets/outlined_delete_button.dart';
 
 class AuthorCard extends StatelessWidget {
   const AuthorCard({
@@ -71,16 +73,16 @@ class AuthorCard extends StatelessWidget {
                         ? const Icon(Icons.favorite, color: Colors.red)
                         : const Icon(Icons.favorite, color: Colors.grey)),
                   ),
-                OutlinedButton(
-                  onPressed: () {},
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(width: 2.0, color: Colors.red),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16.0)),
-                  ),
-                  child: const Text(
-                    "Delete",
-                    style: TextStyle(color: Colors.red),
+                OutlinedDeletedButton(
+                  onTap: () => showDialog(
+                    context: context,
+                    builder: (context) => DeleteDialog(
+                      imagePath: imagePath,
+                      data: data,
+                      isSearchList: isSearchList,
+                      authorController: authorController,
+                      index: index,
+                    ),
                   ),
                 ),
               ],
