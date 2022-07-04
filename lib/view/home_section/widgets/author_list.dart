@@ -12,6 +12,7 @@ class AuthorList extends StatelessWidget {
     required this.totalCount,
     required this.listData,
     this.paginationEnable = true,
+    required this.isSearchList,
   }) : super(key: key);
 
   final AuthorController authorController;
@@ -19,6 +20,7 @@ class AuthorList extends StatelessWidget {
 
   final int totalCount;
   final bool paginationEnable;
+  final bool isSearchList;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,13 @@ class AuthorList extends StatelessWidget {
           return Obx(
             () => Column(
               children: [
-                AuthorCard(imagePath: imagePath, data: data),
+                AuthorCard(
+                  authorController: authorController,
+                  imagePath: imagePath,
+                  data: data,
+                  isSearchList: isSearchList,
+                  index: index,
+                ),
                 if (authorController.paginationLoading.value &&
                     (index + 1) == totalCount)
                   const CircularProgressIndicator()

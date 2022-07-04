@@ -15,6 +15,8 @@ class AuthorController extends GetxController {
   RxBool isSearchList = false.obs;
   String? paginationToken;
 
+  RxList<bool> favouriteList = <bool>[].obs;
+
   RxList<AuthorsListModel> authorsList = <AuthorsListModel>[].obs;
   RxList<AuthorsListModel> searchedAuthorsList = <AuthorsListModel>[].obs;
 
@@ -60,12 +62,14 @@ class AuthorController extends GetxController {
     if (authorsModel.messages != null) {
       for (var element in authorsModel.messages!) {
         AuthorsListModel authorsListModel = AuthorsListModel(
-            element.content ?? "",
-            yearCalculation(element.updated ?? DateTime.now()),
-            element.id ?? 0,
-            element.author?.name ?? "",
-            element.author?.photoUrl ?? "");
+          element.content ?? "",
+          yearCalculation(element.updated ?? DateTime.now()),
+          element.id ?? 0,
+          element.author?.name ?? "",
+          element.author?.photoUrl ?? "",
+        );
         authorsList.add(authorsListModel);
+        favouriteList.add(false);
       }
     }
   }
@@ -90,5 +94,11 @@ class AuthorController extends GetxController {
     } else {
       isSearchList.value = false;
     }
+  }
+
+  void favouriteAction(int index) {
+    print(favouriteList[index]);
+    favouriteList[index] = !favouriteList[index];
+    print(favouriteList[index]);
   }
 }

@@ -38,6 +38,7 @@ class SearchList extends StatelessWidget {
             totalCount: authorController.searchedAuthorsList.length,
             listData: authorController.searchedAuthorsList,
             paginationEnable: false,
+            isSearchList: true,
           ),
         ],
       ),

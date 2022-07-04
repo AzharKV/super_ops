@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:super_ops/controllers/author_controller.dart';
 import 'package:super_ops/data/models/authors_list_model.dart';
 
 class AuthorCard extends StatelessWidget {
@@ -6,10 +8,16 @@ class AuthorCard extends StatelessWidget {
     Key? key,
     required this.imagePath,
     required this.data,
+    required this.isSearchList,
+    required this.authorController,
+    required this.index,
   }) : super(key: key);
 
   final String imagePath;
   final AuthorsListModel data;
+  final bool isSearchList;
+  final AuthorController authorController;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -54,13 +62,14 @@ class AuthorCard extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.favorite,
-                    color: Colors.red,
+                if (!isSearchList)
+                  IconButton(
+                    onPressed: () => authorController.favouriteAction(index),
+                    splashColor: Colors.transparent,
+                    icon: Obx(() => authorController.favouriteList[index]
+                        ? const Icon(Icons.favorite, color: Colors.red)
+                        : const Icon(Icons.favorite, color: Colors.grey)),
                   ),
-                ),
                 OutlinedButton(
                   onPressed: () {},
                   style: OutlinedButton.styleFrom(

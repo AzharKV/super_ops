@@ -28,7 +28,9 @@ class HomeScreen extends StatelessWidget {
                           : AuthorList(
                               authorController: authorController,
                               totalCount: authorController.authorsList.length,
-                              listData: authorController.authorsList),
+                              listData: authorController.authorsList,
+                              isSearchList: false,
+                            ),
                     ],
                   ),
           ),
